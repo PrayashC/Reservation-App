@@ -1,0 +1,49 @@
+<div class="container">
+    <section class="vh-50 gradient-custom">
+      <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Please Enter Your Resecheduled Date and Time</h3>
+                
+                <form #checkForm = ngForm (ngSubmit)="update(checkForm)">
+                  <div class="form-group row d-flex justify-content-center">
+                    <div class="col-md-8 mb-4">
+    
+                      <div class="form-outline">
+                          <label class="form-label" for="resvNum">Enter Reservation Number</label>
+                          <input (focusout)="mouseOut()" type="text" class="form-control form-control-lg" placeholder="0000" id="resvNum" [(ngModel)]="resvNum" name="resvNum"/>
+                      </div>
+
+                      <div class="row d-flex justify-content-center">
+                        <div class="col-md-6 mb-4 ">
+        
+                            <div class="form-outline w-100">
+                                <label for="reservationDate" class="form-label">Select Date</label>
+                                <input type="date" id="reservationDate" class="form-control form-control-lg" name="date" [(ngModel)]="resvDetials.date" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4 ">
+                            <div class="form-outline w-100">
+                              <label for="reservationDate" class="form-label">Select Time</label>
+                              <input type="time" id="reservationTime" class= "form-control form-control-lg" name="time" [(ngModel)]="resvDetials.time" />
+                          </div>
+                        </div>
+                    </div>
+
+                      <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+  <div class="container-fluid">
+      <a class="navbar-brand" (click)="toCreate()">Reservation Window</a>
+  </div>
+  <div class="btn-group dropstart">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Menu
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" (click)="toCheck()">Check Reservation</a>
+      <a class="dropdown-item" (click)="toReschedule()">Reschedule Reservation</a>
+      <a class="dropdown-item" (click)="toCancel()">Cancel Reservation</a>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

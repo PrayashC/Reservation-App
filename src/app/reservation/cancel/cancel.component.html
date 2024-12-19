@@ -1,0 +1,59 @@
+<div class="container">
+    <section class="vh-50 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Enter Reservation Number to Cancel Reservation</h3>
+
+                            <form #checkForm=ngForm (ngSubmit)="onsubmit(checkForm)">
+                                <div class="form-group row d-flex justify-content-center">
+                                    <div class="col-md-8 mb-4">
+
+                                        <div class="form-outline">
+                                            <label class="form-label 2.5rem" for="resvNum"></label>
+                                            <input type="text" placeholder="0000" id="resvNum"
+                                                class="form-control form-control-lg" name="resvNum" ngModel />
+                                        </div>
+
+                                        <div *ngIf="confirm; else okBlock">
+                                            <div *ngIf="notExist; else cancelBlock">
+                                                <label>Please check your Reservation Number</label>
+                                            </div>
+                                        </div>
+
+                                        <ng-template #cancelBlock>
+                                            <div *ngIf="cancelled; else confirmBlock">
+                                                <label>Your Reservation is Successfully Cancelled.</label>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template #confirmBlock>
+                                            <label class="form-label" *ngFor="let item of resvDetials">
+                                                <p class="bg-secondary text-black">Reservation Info.</p>
+                                                <label>Name: {{item.name}}</label>
+                                                <p>Reservation For: {{item.date}} at {{item.time}}</p>
+                                                <p>Confirm Cancellation?</p>
+                                            </label>
+                                            <div class="mt-4">
+                                                <button type="button" class="btn btn-danger"
+                                                    (click)="confirmCancel()">Cancel</button>
+                                            </div>
+                                        </ng-template>
+
+                                        <ng-template #okBlock>
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-danger">OK</button>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

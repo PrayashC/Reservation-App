@@ -1,0 +1,45 @@
+<div class="container">
+    <section class="vh-50 gradient-custom">
+      <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Check Your Reservation Here</h3>
+                
+                <form #checkForm = ngForm (ngSubmit)="onsubmit(checkForm)">
+                  <div class="form-group row d-flex justify-content-center">
+                    <div class="col-md-8 mb-4">
+    
+                      <div class="form-outline">
+                          <label class="form-label" for="resvNum">Enter Reservation Number</label>
+                          <input type="text" placeholder="0000" id="resvNum" class="form-control form-control-lg" name="resvNum" ngModel/>
+                      </div>
+                      <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <h2>
+                    <div *ngIf="notExist; else detailBlock">
+                      <p class="bg-secondary text-white">Reservation Info.</p>
+                      <p>No Reservations</p>
+                    </div>
+                    <ng-template #detailBlock>
+                      <div  *ngFor="let item of allResv">
+                        <p class="bg-secondary text-white">Reservation Info.</p> 
+                        <p>Name: {{item.name}}</p>
+                        <p>Reservation For: {{item.date}} at {{item.time}}</p>
+                      </div>
+                    </ng-template>
+                    
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
