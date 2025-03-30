@@ -1,3 +1,25 @@
 {
-  "reservations": []
+  "reservations": [
+    {
+      "id": "7972",
+      "name": "prayash chettri",
+      "mobile": "123456789",
+      "date": "2025-02-12",
+      "time": "15:00"
+    },
+    {
+      "id": "5696",
+      "name": "test user",
+      "mobile": "1231231234",
+      "date": "2025-03-31",
+      "time": "18:30"
+    },
+    {
+      "id": "4955",
+      "name": "test user",
+      "mobile": "1231231234",
+      "date": "2025-04-01",
+      "time": "18:00"
+    }
+  ]
 }

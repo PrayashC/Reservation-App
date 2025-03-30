@@ -24,7 +24,7 @@ export class SuccessfulComponent {
     this.rservice.get().subscribe((data) => {
       this.allResv = data;
       this.generatedId = this.allResv[this.allResv.length-1].id;
-      this.resvmsg = "Your reservation is successful, Please Note your Reservation Number: "+ this.generatedId ;
+      this.resvmsg = "Your reservation is successful, please note your Reservation Number: "+ this.generatedId ;
     })
   }
   

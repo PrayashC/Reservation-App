@@ -14,15 +14,17 @@ export class CancelComponent {
   confirm = false;
   cancelled = false;
   notExist = false;
+  islock = false;
   ngOnInit(): void {
   }
 
   constructor(private rservice: RserviceService, private route: Router){}
 
-  onsubmit(checkForm : {value: any;}):void{
-    this.resvNum = checkForm.value.resvNum;
+  onsubmit(cancel : {value: any;}):void{
+    this.resvNum = cancel.value.resvNum;
     this.get(this.resvNum);
     this.confirm = true;
+    this.islock = true;
   }
 
   get(id: string) {
@@ -46,4 +48,7 @@ export class CancelComponent {
     this.resvNum="";
   }
 
+  refreshPage() {
+    location.reload();
+  }
 }

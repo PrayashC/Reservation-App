@@ -17,12 +17,13 @@ export class RescheduleComponent {
     date: new Date().toLocaleString(),
     time: ""
   };
+
+  constructor(private router: Router, private rservice: RserviceService){}
+
   resvNum="";
 
   ngOnInit(): void {
   }
-
-  constructor(private router: Router, private rservice: RserviceService){}
 
   mouseOut(){
     this.getById(+this.resvNum);
@@ -36,13 +37,9 @@ export class RescheduleComponent {
     })
   }
 
-  // onsubmit(){
-  //   this.update()
-  // }
-
-  update(checkForm : {value: any;}):void{
-    this.resvDetials.date = checkForm.value.date;
-    this.resvDetials.time = checkForm.value.time;
+  update(reschedule : {value: any;}):void{
+    this.resvDetials.date = reschedule.value.date;
+    this.resvDetials.time = reschedule.value.time;
     this.rservice.update(this.resvDetials).subscribe({
       next:(data) => {
         this.router.navigate(["/reservation/check"]);

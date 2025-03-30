@@ -6,20 +6,32 @@
                     <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Enter Reservation Number to Cancel Reservation</h3>
-
-                            <form #checkForm=ngForm (ngSubmit)="onsubmit(checkForm)">
+                            <form #cancel=ngForm (ngSubmit)="onsubmit(cancel)">
                                 <div class="form-group row d-flex justify-content-center">
                                     <div class="col-md-8 mb-4">
 
                                         <div class="form-outline">
                                             <label class="form-label 2.5rem" for="resvNum"></label>
-                                            <input type="text" placeholder="0000" id="resvNum"
-                                                class="form-control form-control-lg" name="resvNum" ngModel />
+                                            <input type="text" 
+                                                placeholder="####" id="resvNum"
+                                                class="form-control form-control-lg"
+                                                name="resvNum"
+                                                ngModel 
+                                                required pattern=".{4}" maxlength="4"
+                                                #id = "ngModel"
+                                                [disabled]="islock"/>
+                                        </div>
+                                        <div *ngIf="id.invalid && id.touched" class="alert alert-danger">
+                                          <small *ngIf="id.errors?.['required']">Field is required.</small>
+                                          <small *ngIf="id.errors?.['pattern']">Please enter 4-digit Reservation number.</small>
                                         </div>
 
                                         <div *ngIf="confirm; else okBlock">
                                             <div *ngIf="notExist; else cancelBlock">
-                                                <label>Please check your Reservation Number</label>
+                                                <label>Please recheck your Reservation Number</label>
+                                                <div>
+                                                    <button type="button" class="btn btn-info" (click)="refreshPage()">OK</button>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -30,21 +42,23 @@
                                         </ng-template>
 
                                         <ng-template #confirmBlock>
-                                            <label class="form-label" *ngFor="let item of resvDetials">
-                                                <p class="bg-secondary text-black">Reservation Info.</p>
-                                                <label>Name: {{item.name}}</label>
-                                                <p>Reservation For: {{item.date}} at {{item.time}}</p>
-                                                <p>Confirm Cancellation?</p>
-                                            </label>
-                                            <div class="mt-4">
-                                                <button type="button" class="btn btn-danger"
-                                                    (click)="confirmCancel()">Cancel</button>
+                                            <div class="form-label" *ngFor="let item of resvDetials">
+                                                <div class="bg-secondary text-black mt-2">Reservation Info.</div>
+                                                <div>
+                                                    <div>Name: <b>{{item.name}}</b></div>
+                                                    <div>Reservation For: <b>{{item.date | date:'longDate'}}</b> at <b>{{item.time}}</b></div>
+                                                    <div><h5>Confirm Cancellation?</h5></div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4 d-grid gap-2 d-md-flex justify-content-md-start">
+                                                <button type="button" class="btn btn-danger" (click)="confirmCancel()">Yes</button>
+                                                <button type="button" class="btn btn-success" (click)="refreshPage()">No</button>
                                             </div>
                                         </ng-template>
 
                                         <ng-template #okBlock>
                                             <div class="mt-4">
-                                                <button type="submit" class="btn btn-danger">OK</button>
+                                                <button type="submit" class="btn btn-primary" [disabled]="cancel.invalid">OK</button>
                                             </div>
                                         </ng-template>
                                     </div>

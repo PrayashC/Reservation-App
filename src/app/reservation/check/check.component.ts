@@ -25,11 +25,19 @@ export class CheckComponent {
   }
 
   get(resvNum: string) {
-    this.rservice.get().subscribe((data) => {
-      this.allResv = data.filter(a => a.id == resvNum);
-      if(this.allResv.length === 0){
-        this.notExist = true;
-      }
-    })
+    try {
+      this.rservice.get().subscribe((data) => {
+        this.allResv = data.filter(a => a.id == resvNum);
+        if(this.allResv.length === 0){
+          this.notExist = true;
+        }
+      })
+    } catch (error) {
+      console.log("error fetching data", error); 
+    }
+  }
+
+  refreshPage() {
+    location.reload();
   }
 }

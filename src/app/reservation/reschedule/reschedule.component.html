@@ -5,35 +5,65 @@
           <div class="col-12 col-lg-9 col-xl-7">
             <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
               <div class="card-body p-4 p-md-5">
-                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Please Enter Your Resecheduled Date and Time</h3>
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Kindly enter the preferred date and time for your reschedule.</h3>
                 
-                <form #checkForm = ngForm (ngSubmit)="update(checkForm)">
+                <form #resechedule = ngForm (ngSubmit)="update(resechedule)" novalidate>
                   <div class="form-group row d-flex justify-content-center">
                     <div class="col-md-8 mb-4">
     
                       <div class="form-outline">
                           <label class="form-label" for="resvNum">Enter Reservation Number</label>
-                          <input (focusout)="mouseOut()" type="text" class="form-control form-control-lg" placeholder="0000" id="resvNum" [(ngModel)]="resvNum" name="resvNum"/>
+                          <input type="text" 
+                            class="form-control form-control-lg" 
+                            placeholder="####" 
+                            id="resvNum" 
+                            name="resvNum" 
+                            (focusout)="mouseOut()" 
+                            [(ngModel)]="resvNum"
+                            required pattern=".{4}" maxlength="4"
+                            ngModel
+                            #id = "ngModel"/>
+                      </div>
+                      <div *ngIf="id.invalid && id.touched" class="alert alert-danger">
+                        <small *ngIf="id.errors?.['required']">Field is required.</small>
+                        <small *ngIf="id.errors?.['pattern']">Please enter 4-digit Reservation number.</small>
                       </div>
 
                       <div class="row d-flex justify-content-center">
-                        <div class="col-md-6 mb-4 ">
-        
-                            <div class="form-outline w-100">
-                                <label for="reservationDate" class="form-label">Select Date</label>
-                                <input type="date" id="reservationDate" class="form-control form-control-lg" name="date" [(ngModel)]="resvDetials.date" />
-                            </div>
+                        <div class="col-md-6 mb-4 mt-2">
+                          <div class="form-outline w-100">
+                              <label for="reservationDate" class="form-label">Select Date</label>
+                              <input type="date" 
+                                id="reservationDate" 
+                                class="form-control form-control-lg" 
+                                name="date" 
+                                [(ngModel)]="resvDetials.date"
+                                required
+                                #date = "ngModel" />
+                          </div>
+                          <div *ngIf="date.invalid && date.touched" class="alert alert-danger">
+                            <small *ngIf="date.errors?.['required']">Please Set Date.</small>
+                          </div>
                         </div>
-                        <div class="col-md-6 mb-4 ">
-                            <div class="form-outline w-100">
-                              <label for="reservationDate" class="form-label">Select Time</label>
-                              <input type="time" id="reservationTime" class= "form-control form-control-lg" name="time" [(ngModel)]="resvDetials.time" />
+                        <div class="col-md-6 mb-4 mt-2">
+                          <div class="form-outline w-100">
+                            <label for="reservationDate" class="form-label">Select Time</label>
+                            <input type="time" 
+                              id="reservationTime" 
+                              class= "form-control form-control-lg" 
+                              name="time" 
+                              [(ngModel)]="resvDetials.time"
+                              required
+                              #time = "ngModel"/>
+                          </div>
+                          <div *ngIf="time.invalid && time.touched" class="alert alert-danger">
+                            <small *ngIf="time.errors?.['required']">Please Set Time.</small>
                           </div>
                         </div>
                     </div>
 
-                      <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                      <div class="mt-4 col-md-3 mx-auto">
+                        <button type="submit" class="btn btn-primary" [disabled]="resechedule.invalid">Submit</button>
                       </div>
                       
                     </div>
